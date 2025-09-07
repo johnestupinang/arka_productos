@@ -5,7 +5,9 @@ import com.arka.products.models.dtos.pais.PaisResponseDto;
 import com.arka.products.models.entities.Pais;
 import com.arka.products.repositories.IPaisRepository;
 import com.arka.products.services.IPaisService;
+import com.arka.products.utilidades.exceptions.PaisException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,9 +57,14 @@ public class PaisServiceImpl implements IPaisService {
     @Override
     public void eliminar(Long id) {
         boolean existePais = iPaisRepository.existsById(id);
-        if (existePais) {
-            iPaisRepository.deleteById(id);
+        if (!existePais) {
+            throw new PaisException(
+                    "Pais no encontrado con id: " + id,
+                    HttpStatus.NOT_FOUND,
+                    "PAIS_404"
+            );
         }
+        iPaisRepository.deleteById(id);
     }
 
 }

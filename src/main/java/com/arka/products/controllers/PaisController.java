@@ -4,6 +4,7 @@ import com.arka.products.models.dtos.pais.PaisRequestDto;
 import com.arka.products.models.dtos.pais.PaisResponseDto;
 import com.arka.products.services.IPaisService;
 import com.arka.products.utilidades.Constantes;
+import com.arka.products.utilidades.exceptions.PaisException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,10 +68,18 @@ public class PaisController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable("id") Long id){
-        iPaisService.eliminar(id);
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .build();
+        try{
+            iPaisService.eliminar(id);
+            return ResponseEntity
+                    .status(HttpStatus.NO_CONTENT)
+                    .build();
+        }catch (PaisException ex){
+            return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+
     }
 
 }
