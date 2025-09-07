@@ -19,4 +19,10 @@ public class Marca {
     @JoinColumn(name = "id_pais", nullable = false)
     private Pais pais;
 
+    public Marca(String nombre, String descripcion, Pais pais) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.pais = pais;
+    }
+
 }
