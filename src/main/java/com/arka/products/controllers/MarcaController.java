@@ -54,7 +54,7 @@ public class MarcaController {
                 })
                 .orElseGet(() -> {
                             return ResponseEntity
-                                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                    .status(HttpStatus.NOT_FOUND)
                                     .body(new MarcaResponseDto(0L,"", "", new PaisResponseDto(0L, "", "")));
                 });
     }
