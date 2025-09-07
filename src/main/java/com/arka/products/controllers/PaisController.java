@@ -30,7 +30,7 @@ public class PaisController {
                            .status(HttpStatus.CREATED)
                            .body(paisResponseDto);
                 })
-                .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new PaisResponseDto("","")));
+                .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new PaisResponseDto(0L, "","")));
     }
 
     @GetMapping
@@ -48,7 +48,7 @@ public class PaisController {
                         .body(paisResponseDto))
                 .orElseGet(() -> ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
-                        .body(new PaisResponseDto("","")));
+                        .body(new PaisResponseDto(0L,"","")));
     }
 
     @PutMapping("/{id}")
@@ -61,7 +61,7 @@ public class PaisController {
                         }
                 ).orElse(ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
-                        .body(new PaisResponseDto("","")));
+                        .body(new PaisResponseDto(0L, "","")));
 
     }
 

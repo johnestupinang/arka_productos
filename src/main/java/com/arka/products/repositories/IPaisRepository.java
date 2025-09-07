@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPaisRepository extends JpaRepository <Pais, Long>{
+    boolean existsByNombre(String nombre);
+    Pais findByNombre(String nombre);
 }
