@@ -7,5 +7,6 @@ public class Constantes {
     public static final String API_PAISES = API + "/paises";
     public static final String API_MARCAS = API + "/marcas";
     public static final String API_CATEGORIAS = API + "/categorias";
+    public static final String API_PRODUCTOS = API + "/productos";
 
 }

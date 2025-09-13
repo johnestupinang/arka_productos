@@ -1,17 +1,17 @@
 package com.arka.products.services;
 
+import com.arka.products.models.dtos.marca.MarcaRequestDto;
 import com.arka.products.models.dtos.pais.PaisRequestDto;
 import com.arka.products.models.dtos.pais.PaisResponseDto;
+import com.arka.products.models.entities.Pais;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IPaisService {
-
-    Optional<PaisResponseDto> guardar (PaisRequestDto paisRequestDto);
+    PaisResponseDto guardar (PaisRequestDto paisRequestDto);
     List<PaisResponseDto> obtenerTodos ();
-    Optional<PaisResponseDto> obtenerPaisPorId (Long id);
-    Optional<PaisResponseDto> actualizar (Long id, PaisRequestDto paisRequestDto);
+    PaisResponseDto obtenerPaisPorId (Long id);
+    PaisResponseDto actualizar (Long id, PaisRequestDto paisRequestDto);
     void eliminar (Long id);
-
+    Pais validarPais(MarcaRequestDto marcaRequestDto);
 }

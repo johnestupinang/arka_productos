@@ -2,16 +2,18 @@ package com.arka.products.services;
 
 import com.arka.products.models.dtos.marca.MarcaRequestDto;
 import com.arka.products.models.dtos.marca.MarcaResponseDto;
+import com.arka.products.models.dtos.producto.ProductoRequestDto;
+import com.arka.products.models.entities.Marca;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IMarcaService {
-
-    Optional<MarcaResponseDto> guardar (MarcaRequestDto marcaRequestDto);
+    MarcaResponseDto guardar (MarcaRequestDto marcaRequestDto);
     List<MarcaResponseDto> obtenerTodos ();
-    Optional<MarcaResponseDto> obtenerMarcaPorId (Long id);
-    Optional<MarcaResponseDto> actualizar (Long id, MarcaRequestDto marcaRequestDto);
+    MarcaResponseDto obtenerMarcaPorId (Long id);
+    MarcaResponseDto actualizar (Long id, MarcaRequestDto marcaRequestDto);
     void eliminar (Long id);
-
+    boolean existePorNombre (String nombre);
+    Marca obtenerPorNombre (String nombre);
+    Marca validarMarca(ProductoRequestDto productoRequestDto);
 }
