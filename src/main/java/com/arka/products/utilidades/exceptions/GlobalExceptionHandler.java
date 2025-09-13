@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler {
     }
 
     //Para errores de Categoria
-    @ExceptionHandler(MarcaException.class)
+    @ExceptionHandler(CategoriaException.class)
     public ResponseEntity<ErrorResponse> handleCategoriaException(CategoriaException exception){
         Map<String, String> errores = new HashMap<>();
         errores.put("mensaje", exception.getMessage());
@@ -91,6 +92,26 @@ public class GlobalExceptionHandler {
                 .errores(errores)
                 .build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(errorResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
+
+        Map<String, String> error = new HashMap<>();
+        exception.getBindingResult().getFieldErrors().forEach(fieldError -> {
+            String field = fieldError.getField();
+            String message = fieldError.getDefaultMessage();
+            error.put(field, message);
+        });
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .mensaje("Validacion de la peticion fallida")
+                .estado(HttpStatus.BAD_REQUEST.value())
+                .fecha(LocalDateTime.now())
+                .errores(error)
+                .build();
+
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 
     @Getter

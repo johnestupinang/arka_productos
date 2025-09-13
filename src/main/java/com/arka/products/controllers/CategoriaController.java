@@ -4,6 +4,7 @@ import com.arka.products.models.dtos.categoria.CategoriaRequestDto;
 import com.arka.products.models.dtos.categoria.CategoriaResponseDto;
 import com.arka.products.services.ICategoriaService;
 import com.arka.products.utilidades.Constantes;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class CategoriaController {
     private final ICategoriaService iCategoriaService;
 
     @PostMapping
-    public ResponseEntity<CategoriaResponseDto> guardar (@RequestBody CategoriaRequestDto categoriaRequestDto){
+    public ResponseEntity<CategoriaResponseDto> guardar (@Valid @RequestBody CategoriaRequestDto categoriaRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body( iCategoriaService.guardar(categoriaRequestDto));
     }
 
@@ -34,7 +35,7 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaResponseDto> actualizar(@PathVariable("id") Long id, @RequestBody CategoriaRequestDto categoriaRequestDto){
+    public ResponseEntity<CategoriaResponseDto> actualizar(@PathVariable("id") Long id, @Valid @RequestBody CategoriaRequestDto categoriaRequestDto){
         return ResponseEntity.status(HttpStatus.OK).body(iCategoriaService.actualizar(id, categoriaRequestDto));
     }
 

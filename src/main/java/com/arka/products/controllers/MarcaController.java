@@ -4,6 +4,7 @@ import com.arka.products.models.dtos.marca.MarcaRequestDto;
 import com.arka.products.models.dtos.marca.MarcaResponseDto;
 import com.arka.products.services.IMarcaService;
 import com.arka.products.utilidades.Constantes;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class MarcaController {
     private final IMarcaService iMarcaService;
 
     @PostMapping
-    public ResponseEntity<MarcaResponseDto> guardar (@RequestBody MarcaRequestDto marcaRequestDto){
+    public ResponseEntity<MarcaResponseDto> guardar (@Valid @RequestBody MarcaRequestDto marcaRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(iMarcaService.guardar(marcaRequestDto));
     }
 
@@ -36,7 +37,7 @@ public class MarcaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MarcaResponseDto> actualizar (@PathVariable("id") Long id, @RequestBody MarcaRequestDto marcaRequestDto){
+    public ResponseEntity<MarcaResponseDto> actualizar (@PathVariable("id") Long id, @Valid @RequestBody MarcaRequestDto marcaRequestDto){
         return ResponseEntity.status(HttpStatus.OK).body(iMarcaService.actualizar(id, marcaRequestDto));
     }
 

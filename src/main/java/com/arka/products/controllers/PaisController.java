@@ -5,6 +5,7 @@ import com.arka.products.models.dtos.pais.PaisResponseDto;
 import com.arka.products.services.IPaisService;
 import com.arka.products.utilidades.Constantes;
 import com.arka.products.utilidades.exceptions.PaisException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
@@ -22,7 +23,7 @@ public class PaisController {
     private final IPaisService iPaisService;
 
     @PostMapping
-    public ResponseEntity<PaisResponseDto> guardar(@RequestBody PaisRequestDto paisRequestDto){
+    public ResponseEntity<PaisResponseDto> guardar(@Valid @RequestBody PaisRequestDto paisRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(iPaisService.guardar(paisRequestDto));
     }
 
@@ -37,7 +38,7 @@ public class PaisController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PaisResponseDto> actualizar(@PathVariable("id") Long id, @RequestBody PaisRequestDto paisRequestDto){
+    public ResponseEntity<PaisResponseDto> actualizar(@PathVariable("id") Long id, @Valid @RequestBody PaisRequestDto paisRequestDto){
         return ResponseEntity.status(HttpStatus.OK).body(iPaisService.actualizar(id, paisRequestDto));
     }
 
