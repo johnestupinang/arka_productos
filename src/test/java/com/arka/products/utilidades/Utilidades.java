@@ -18,6 +18,7 @@ public class Utilidades {
     private static final List<Pais> paises = new ArrayList<>();
     private static final List<Categoria> categorias = new ArrayList<>();
     private static final List<Marca> marcas = new ArrayList<>();
+    private static final List<Producto> productos = new ArrayList<>();
 
     public Pais paisDummy(){
         return new Pais(1L, "Colombia", "COL");
@@ -82,5 +83,10 @@ public class Utilidades {
     public List<Marca> listaMarcas(){
         marcas.add(marcaDummy());
         return marcas;
+    }
+
+    public List<Producto> listaProductos(){
+        productos.add(productoDummy());
+        return productos;
     }
 }

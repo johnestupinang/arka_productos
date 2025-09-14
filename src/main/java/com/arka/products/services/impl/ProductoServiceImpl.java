@@ -110,8 +110,8 @@ public class ProductoServiceImpl implements IProductoService {
                 .orElseThrow(() -> {
                     throw new ProductoException(
                             "Error al actualizar producto: "+ productoRequestDto.nombre(),
-                            HttpStatus.CONFLICT,
-                            CodigoError.CONFLICTO.name()
+                            HttpStatus.NOT_FOUND,
+                            CodigoError.NO_ENCONTRADO.name()
                     );
                 });
     }
