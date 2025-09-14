@@ -91,8 +91,8 @@ public class CategoriaServiceImpl implements ICategoriaService {
                 .orElseThrow(() -> {
                     throw new CategoriaException(
                             "Error al actualizar categoria: " + categoriaRequestDto.nombre(),
-                            HttpStatus.CONFLICT,
-                            CodigoError.CONFLICTO.name()
+                            HttpStatus.NOT_FOUND,
+                            CodigoError.NO_ENCONTRADO.name()
                     );
                 });
     }
