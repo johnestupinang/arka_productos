@@ -59,7 +59,7 @@ public class CategoriaServiceTest {
 
     @Test
     void test_debeObtenerListaCategorias_Exitoso() {
-        var categorias = util.listaCategorias();
+        categorias = util.listaCategorias();
         when(iCategoriaRepository.findAll()).thenReturn(categorias);
         var categoriasEsperada = categoriaService.obtenerTodos();
         Assertions.assertEquals(categorias.size(), categoriasEsperada.size());

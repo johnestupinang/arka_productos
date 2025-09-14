@@ -5,10 +5,8 @@ import com.arka.products.models.dtos.marca.MarcaResponseDto;
 import com.arka.products.models.dtos.pais.PaisResponseDto;
 import com.arka.products.models.dtos.producto.ProductoRequestDto;
 import com.arka.products.models.entities.Marca;
-import com.arka.products.models.entities.Pais;
 import com.arka.products.models.enums.CodigoError;
 import com.arka.products.repositories.IMarcaRepository;
-import com.arka.products.repositories.IPaisRepository;
 import com.arka.products.services.IMarcaService;
 import com.arka.products.services.IPaisService;
 import com.arka.products.utilidades.exceptions.MarcaException;
@@ -65,7 +63,7 @@ public class MarcaServiceImpl implements IMarcaService {
                 .map( marca -> new MarcaResponseDto(marca.getId(), marca.getNombre(), marca.getDescripcion(), new PaisResponseDto(marca.getPais().getId(), marca.getPais().getNombre(), marca.getPais().getCodigo())))
                 .orElseThrow(
                         () -> {
-                            throw new PaisException("Marca no encontrada con el id: "+ id, HttpStatus.NOT_FOUND, CodigoError.NO_ENCONTRADO.name());
+                            throw new MarcaException("Marca no encontrada con el id: "+ id, HttpStatus.NOT_FOUND, CodigoError.NO_ENCONTRADO.name());
                         }
                 );
     }
@@ -89,8 +87,8 @@ public class MarcaServiceImpl implements IMarcaService {
                         () -> {
                             throw new MarcaException(
                               "Error al actualizar marca: "+marcaRequestDto.nombre(),
-                              HttpStatus.CONFLICT,
-                              CodigoError.CONFLICTO.name()
+                              HttpStatus.NOT_FOUND,
+                              CodigoError.NO_ENCONTRADO.name()
                             );
                         }
                 );
