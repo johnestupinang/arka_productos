@@ -82,8 +82,8 @@ public class PaisServiceImpl implements IPaisService {
                         () -> {
                             throw new PaisException(
                               "Error al actualizar pais: "+ paisRequestDto.nombre(),
-                              HttpStatus.CONFLICT,
-                              CodigoError.CONFLICTO.name()
+                              HttpStatus.NOT_FOUND,
+                              CodigoError.NO_ENCONTRADO.name()
                             );
                         }
                 );

@@ -80,6 +80,22 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(exception.getStatus()).body(errorResponse);
     }
 
+    //Para errores de Proveedor
+    @ExceptionHandler(ProveedorException.class)
+    public ResponseEntity<ErrorResponse> handleProveedorException(ProveedorException exception){
+        Map<String, String> errores = new HashMap<>();
+        errores.put("mensaje", exception.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .mensaje("Error en proveedor")
+                .estado(exception.getStatus().value())
+                .fecha(LocalDateTime.now())
+                .errores(errores)
+                .build();
+
+        return ResponseEntity.status(exception.getStatus()).body(errorResponse);
+    }
+
     // Handler genérico (fallback)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
